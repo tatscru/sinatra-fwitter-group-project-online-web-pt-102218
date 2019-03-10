@@ -20,7 +20,6 @@ class UsersController < ApplicationController
     end
   end
 
-<<<<<<< HEAD
   get '/signup' do 
     if !Helpers.logged_in?(session)
       erb :"/users/new_user"
@@ -60,7 +59,6 @@ class UsersController < ApplicationController
     end
 	end
 
-=======
   get '/login' do 
     if !Helpers.logged_in?(session)
       erb :"users/login"
@@ -78,9 +76,8 @@ class UsersController < ApplicationController
     else
       redirect to "/login"
     end
-	end
-
->>>>>>> 8f24a1f1f2005b6d3db81cd080f048d493347eeb
+  end 
+  
   get '/logout' do
     if Helpers.logged_in?(session)
       session.clear
@@ -88,12 +85,7 @@ class UsersController < ApplicationController
     else
       redirect to '/'
     end
+  end 
 
-  end
-<<<<<<< HEAD
 end
-=======
-end 
-  
- 
->>>>>>> 8f24a1f1f2005b6d3db81cd080f048d493347eeb
+

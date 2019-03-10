@@ -51,9 +51,4 @@ class TweetsController < ApplicationController
   #   end
   # end 
   
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> 8f24a1f1f2005b6d3db81cd080f048d493347eeb
 end

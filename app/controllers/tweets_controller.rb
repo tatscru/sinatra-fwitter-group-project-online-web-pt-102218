@@ -32,23 +32,52 @@ class TweetsController < ApplicationController
   end
  
   get '/tweeets/:id' do 
-     if !Helpers.is_logged_in?(session)
+    if !Helpers.logged_in?(session)
       redirect to '/login'
-    end
+    end  
     @tweet = Tweet.find(params[:id])
     erb :"tweets/show_tweet"
     #if not logged in, direct to login- otherwise find tweet by id 
   end 
   
-  # get '/tweets/:id/edit' do
-  #   redirect to '/login' unless Helpers.is_logged_in?(session)
+  
+  get '/tweets/:id/edit' do
+    if !Helpers.logged_in?(session)
+      redirect '/login'
+    end 
+    @tweet = Tweet.find(params[:id])
+     
+    @tweet.user == Helpers.current_user(session)
+      erb :'/tweets/edit_tweet'
+  end 
+  
+  patch '/tweets/:id' do
+    tweet = Tweet.find(params[:id])
 
-  #   @tweet = Tweet.find(params[:id])
-  #   if @tweet.user == Helpers.current_user(session)
-  #       erb :'/tweets/edit_tweet'
-  #   else
-  #     redirect to '/login'
-  #   end
-  # end 
+    if params[:tweet][:content].empty?
+      redirect "/tweets/#{@tweet.id}/edit"
+    end
+
+    tweet.update(params[:content])
+    tweet.save
+    redirect "/tweets/#{@tweet.id}"
+  end
+
+  delete '/tweets/:id/delete' do
+    if Helpers.is_logged_in?(session)
+      @tweet = Tweet.find(params[:id])
+      if @tweet.user == Helpers.current_user(session)
+        @tweet = Tweet.find_by_id(params[:id])
+        @tweet.delete
+        redirect to '/tweets'
+      else
+        redirect to '/tweets'
+      end
+    else
+      redirect to '/login'
+    end
+  end
   
 end
+
+

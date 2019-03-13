@@ -63,19 +63,32 @@ class TweetsController < ApplicationController
     redirect "/tweets/#{@tweet.id}"
   end
 
-  delete '/tweets/:id/delete' do
-    if Helpers.is_logged_in?(session)
-      @tweet = Tweet.find(params[:id])
-      if @tweet.user == Helpers.current_user(session)
-        @tweet = Tweet.find_by_id(params[:id])
-        @tweet.delete
-        redirect to '/tweets'
-      else
-        redirect to '/tweets'
-      end
-    else
+  # delete '/tweets/:id/delete' do
+  #   if Helpers.is_logged_in?(session)
+  #     @tweet = Tweet.find(params[:id])
+  #     if @tweet.user == Helpers.current_user(session)
+  #       @tweet = Tweet.find_by_id(params[:id])
+  #       @tweet.delete
+  #       redirect to '/tweets'
+  #     else
+  #       redirect to '/tweets'
+  #     end
+  #   else
+  #     redirect to '/login'
+  #   end
+  # end
+  
+   delete '/tweets/:id/delete' do
+    if !Helpers.is_logged_in?(session)
       redirect to '/login'
     end
+    @tweet = Tweet.find(params[:id])
+    if Helpers.current_user(session).id != @tweet.user_id
+      flash[:wrong_user] = "Sorry you can only delete your own tweets"
+      redirect to '/tweets'
+    end
+    @tweet.delete
+    redirect to '/tweets'
   end
   
 end

@@ -72,7 +72,7 @@ class TweetsController < ApplicationController
       flash[:wrong_user] = "Sorry you can only delete your own tweets"
       redirect to '/tweets'
     end
-    @tweet.delete
+    @tweet.destroy
     redirect to '/tweets'
   end
   

@@ -411,5 +411,5 @@ describe ApplicationController do
   #       expect(page.current_path).to eq("/login")
   #     end
   #   # end
-  end
+  # end
 end

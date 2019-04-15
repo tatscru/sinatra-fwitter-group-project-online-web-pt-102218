@@ -280,7 +280,7 @@ describe ApplicationController do
   #       expect(page.body).to include("Delete Tweet")
   #       expect(page.body).to include(tweet.content)
   #       expect(page.body).to include("Edit Tweet")
-  #     end
+      end
     end
 
     context 'logged out' do

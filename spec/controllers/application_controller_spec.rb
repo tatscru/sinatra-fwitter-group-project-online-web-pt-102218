@@ -262,8 +262,8 @@ describe ApplicationController do
     end
   end
 
-  # describe 'show action' do
-  #   context 'logged in' do
+  describe 'show action' do
+    context 'logged in' do
   #     it 'displays a single tweet' do
 
   #       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")

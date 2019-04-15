@@ -281,7 +281,7 @@ describe ApplicationController do
   #       expect(page.body).to include(tweet.content)
   #       expect(page.body).to include("Edit Tweet")
   #     end
-  #   end
+    end
 
     context 'logged out' do
       it 'does not let a user view a tweet' do
